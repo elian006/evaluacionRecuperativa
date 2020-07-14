@@ -52,7 +52,7 @@ public class ControlProducto extends HttpServlet {
             
             producto p = new producto (getInt("codigo",request),
                                        getString("nombre",request),
-                                       getString("descripcion",request),
+                                       getString("Descripcion",request),
                                        getInt("precio",request));
 
              response.sendRedirect("intranetAdmin.jsp?mensaje="+p.registrarProducto());
@@ -68,7 +68,7 @@ public class ControlProducto extends HttpServlet {
             
             producto p = new producto(getInt("codigo",request),
                                        getString("nombre",request),
-                                       getString("descripcion",request),
+                                       getString("Descripcion",request),
                                        getInt("precio",request));
             response.sendRedirect("intranetAdmin.jsp?mensaje="+p.modificarP());
          } catch (Exception e) {
