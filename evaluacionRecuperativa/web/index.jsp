@@ -19,10 +19,12 @@ and open the template in the editor.
         
         <center>
             
-        <div>Inicio</div>
+            <div style="font-size: 30px;">Arreglos Florales.com</div>
         <br>
         <menu style="border-bottom: 1; background-color:background; ">
-            <a href="intranetAdmin.jsp" >Admin Web</a>
+            <a href="ValidacionAdmin.jsp">
+                        <input type="button" value="Admin" />
+                    </a>
         </menu> 
         <br>
         <br>

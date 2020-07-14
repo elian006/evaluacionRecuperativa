@@ -58,7 +58,7 @@ try{
         String Admin = request.getParameter("Admin").trim();
         String password = request.getParameter("password").trim();
         if(Admin.isEmpty()||password.isEmpty()){
-            response.sendRedirect("index.jsp?mensaje=Complete todos los campos");
+            response.sendRedirect("ValidacionAdmin.jsp?mensaje=Complete todos los campos");
         }else{
             Admin A = new Admin();
             A.setAdmin(Admin);
@@ -68,7 +68,7 @@ try{
                 sesion.setAttribute("Admin", A);
                 response.sendRedirect("intranetAdmin.jsp");
             }else{
-                response.sendRedirect("index.jsp?mensaje=credenciales incorrectas");
+                response.sendRedirect("ValidacionAdmin.jsp?mensaje=credenciales incorrectas");
             }
     }
     }

@@ -4,6 +4,7 @@
     Author     : Elian
 --%>
 
+<%@page import="Modelos.Admin"%>
 <%@page import="Modelos.producto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,25 +14,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Intranet Admin</title>
+        
     </head>
+    <% if(session.getAttribute("Admin")!=null){ 
+        Admin A =(Admin) session.getAttribute("Admin");%>
     <body style=" align-content: center;">
         <br>
         <br>
         <br>
         
         <center>
-            
+           
         <div>Inicio</div>
         <br>
         <menu style="border-bottom: 1; background-color:background; ">
-            <a href="intranetAdmin.jsp" >Admin Web</a>
+            <a href="index.jsp">
+                        <input type="button" value="Inicio"/>
+                    </a>
         </menu> 
         <br>
         <br>
 
-        
-        <table style=" font-size: 20px;" >
-            
+        <form action="ControlProducto" method="post"> 
+                    <table style=" font-size: 20px; align-content: center;"  >
+            <tr Style="font-size: 25px;"> Registrar Producto </tr>
             <tr>
                 <td>
                     Codigo
@@ -43,9 +49,6 @@
                     Descripcion
                 </td>
                 <td>
-                    Cantidad
-                </td>
-                <td>
                     Precio
                 </td>
                 
@@ -55,13 +58,12 @@
                 <td><input type="text" name="codigo" /></td>
                 <td><input type="text" name="nombre" /></td>
                 <td><input type="text" name="Descripcion" /></td>
-                <td><input type="text" name="cantidad" /></td>
                <td><input type="text" name="precio" /></td>
                 <td>              
-                    <input type="submit" value="Agregar al carrito" />   
+                    <input type="submit" value="Agregar producto a la tienda" />   
                 </td>
                 <td>              
-                    <input type="submit" value="ir alcarrito" />   
+                    <input type="submit" value="ir a Pedidos" />   
                 </td>
                 
             </tr>
@@ -71,6 +73,7 @@
         <br>  
         <br>
         <table style=" font-size: 20px; background-color: buttonface;border: 1;">
+            
             <tr >
                 <td>
                     codigo
@@ -95,12 +98,13 @@
                <td><%=p.getNombre()%></td>
                <td><%=p.getDescripcion()%></td>
                <td><%=p.getPrecio()%></td>
-               <td><a href="modificarV.jsp?patente=<%=v.getPatente()%>">
+               
+               <td><a href="ModificarProducto.jsp?patente=<%=p.getCodigo()%>">
                         <input type="button" value="Modificar" />
                     </a>
                </td>
                <td>
-                    <a href="eliminarV.jsp?patente=<%=v.getPatente()%>">
+                    <a href="EliminarProducto.jsp?patente=<%=p.getCodigo()%>">
                         <input type="button" value="Eliminar" />
                     </a>
                </td>
@@ -108,7 +112,16 @@
             <% } %>
          
         </table>
-        </center>
+        
+    <input type="hidden" name="accion" value="1"/>
     
+     </form>
+                        <% if(request.getParameter("mensaje")!=null){%>
+        <%=request.getParameter("mensaje") %>
+        <%}%>
+            </center>
     </body>
+        <% }else{
+    response.sendRedirect("index.jsp?mensaje=acceso denegado");
+    }%>
 </html>
