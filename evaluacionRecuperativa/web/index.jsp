@@ -25,6 +25,7 @@ and open the template in the editor.
             <a href="ValidacionAdmin.jsp">
                         <input type="button" value="Admin" />
                     </a>
+
         </menu> 
         <br>
         <br>
@@ -40,28 +41,29 @@ and open the template in the editor.
                     Nombre
                 </td>
                 <td>
-                    Descripcion
-                </td>
-                <td>
                     Cantidad
                 </td>
-                <td>
-                    Precio
-                </td>
+
                 
             </tr>
             
             <tr>
                 <td><input type="text" name="codigo" /></td>
+                
                 <td><input type="text" name="nombre" /></td>
-                <td><input type="text" name="Descripcion" /></td>
+                
+                
+                
                 <td><input type="text" name="cantidad" /></td>
-               <td><input type="text" name="precio" /></td>
+                
+               
                 <td>              
                     <input type="submit" value="Agregar al carrito" />   
                 </td>
-                <td>              
-                    <input type="submit" value="ir alcarrito" />   
+                <td>     
+                    <a href="Carrito.jsp">
+                    <input type="submit" value="ir al carrito" />  
+                    </a>
                 </td>
                 
             </tr>

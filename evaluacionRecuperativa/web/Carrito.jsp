@@ -1,73 +1,66 @@
 <%-- 
-    Document   : intranetAdmin
-    Created on : 12-07-2020, 19:52:44
+    Document   : Carrito
+    Created on : 14-07-2020, 3:56:02
     Author     : Elian
 --%>
 
-<%@page import="Modelos.Admin"%>
-<%@page import="Modelos.producto"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="Modelos.Carrito"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Intranet Admin</title>
-        
+        <title>Carrito</title>
     </head>
-    <% if(session.getAttribute("Admin")!=null){ 
-        Admin A =(Admin) session.getAttribute("Admin");%>
-    <body style=" align-content: center;">
+ <body style=" align-content: center;">
         <br>
         <br>
         <br>
         
         <center>
            
-            <div style="font-size: 30px;">Productos</div>
+            <div style="font-size: 30px;">Carrito</div>
         <br>
         <menu style="border-bottom: 1; background-color:background; ">
             <a href="index.jsp">
                         <input type="button" value="Inicio"/>
-                    </a>
+            </a>
         </menu> 
         <br>
         
 
-        <form action="ControlProducto" method="post"> 
+        <form action="ControlCarrito" method="post"> 
             <menu Style="font-size: 25px;">
-                 Registrar Producto 
+                 Productos en carrito 
             </menu>
             
              <table style=" font-size: 20px; align-content: center;"  >
             <tr>
                 <td>
-                    Codigo
+                    Codigo Carrito
                 </td>
                 <td>
-                    Nombre
+                    productos
                 </td>
                 <td>
-                    Descripcion
+                    cantidad
                 </td>
                 <td>
-                    Precio
+                    Sub Costo
                 </td>
                 
             </tr>
             
             <tr>
-                <td><input type="text" name="codigo" /></td>
+                <td><input type="text" name="cod" /></td>
                 <td><input type="text" name="nombre" /></td>
                 <td><input type="text" name="Descripcion" /></td>
                <td><input type="text" name="precio" /></td>
-                <td>              
-                    <input type="submit" value="Agregar producto a la tienda" />   
-                </td>
+
                 <td>
-                    <a href="Pedidos.jsp">
-                        <input type="button" value="ir a pedidos" />
+                    <a href="GuardarPedido.jsp">
+                        <input type="button" value="Guardar Pedido" />
                     </a>
                 </td>
                 
@@ -81,35 +74,35 @@
             
             <tr >
                 <td>
-                    codigo
+                    Codigo Carrito
                 </td>
+                <td>    </td>
                 <td>
-                    nombre
+                    productos
                 </td>
+                <td>    </td>
                 <td>
-                    descripcion
+                    cantidad
                 </td>
+                <td>     </td>
                 <td>
-                    precio
+                    Sub Costo
                 </td>
 
             </tr>
-                <% ArrayList <producto> productos= new producto().obtenerProductos();
+                <% ArrayList <Carrito> carritos= new Carrito().obtenerProductosEnC();
                
-            for(producto p:productos){
+            for(Carrito c:carritos){
             %>
             <tr>
-               <td><%=p.getCodigo()%></td>
-               <td><%=p.getNombre()%></td>
-               <td><%=p.getDescripcion()%></td>
-               <td><%=p.getPrecio()%></td>
+               <td><%=c.getCod_carrito()%></td>
+               <td><%=c.getProductos().getNombre()%> </td>
+               <td><%=c.getCantidad()%></td>
+               <td><%=c.getSubCosto()%></td>
                
-               <td><a href="ModificarProducto.jsp?patente=<%=p.getCodigo()%>">
-                        <input type="button" value="Modificar" />
-                    </a>
-               </td>
+
                <td>
-                    <a href="EliminarProducto.jsp?patente=<%=p.getCodigo()%>">
+                    <a href="EliminarCarrito.jsp?Cod_carrito=<%=c.getCod_carrito()%>">
                         <input type="button" value="Eliminar" />
                     </a>
                </td>
@@ -124,7 +117,4 @@
         <%}%>
             </center>
     </body>
-        <% }else{
-    response.sendRedirect("index.jsp?mensaje=acceso denegado");
-    }%>
 </html>
