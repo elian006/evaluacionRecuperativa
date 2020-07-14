@@ -19,18 +19,18 @@ public class producto {
     private int codigo;
     private String nombre;
     private String descripcion;
-    private int valor;
+    private int precio;
     private Conexion conexion;
     
     public producto() throws ClassNotFoundException, SQLException {
         conexion = new Conexion();
     }
 
-    public producto(int codigo, String nombre, String descripcion, int valor) throws ClassNotFoundException, SQLException {
+    public producto(int codigo, String nombre, String descripcion, int precio) throws ClassNotFoundException, SQLException {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.valor = valor;
+        this.precio = precio;
         conexion = new Conexion();
     }
 
@@ -58,12 +58,12 @@ public class producto {
         this.descripcion = descripcion;
     }
 
-    public int getValor() {
-        return valor;
+    public int getPrecio() {
+        return precio;
     }
 
-    public void setValor(int valor) {
-        this.valor = valor;
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
     
     
@@ -71,7 +71,7 @@ public class producto {
         if(validarProducto()){
             return "El producto ya existe";
         }else{
-        String sentencia = "insert into producto values('"+codigo+"',"+ "'"+nombre+"','"+descripcion+"',"+ "'"+valor+"')";
+        String sentencia = "insert into producto values('"+codigo+"',"+ "'"+nombre+"','"+descripcion+"',"+ "'"+precio+"')";
         if(conexion.ejecutarSQL(sentencia)==1){
             return "Producto registrado corectamente";
         }else{
@@ -98,7 +98,7 @@ public class producto {
     }
              public String modificarP() throws SQLException{
         if(validarProducto()){
-            String sentencia = "update producto set cod_producto = '"+nombre+"','"+descripcion+"','"+valor+"',"
+            String sentencia = "update producto set cod_producto = '"+nombre+"','"+descripcion+"','"+precio+"',"
                     + "" + "where cod_producto = '"+codigo+"'";
         if(conexion.ejecutarSQL(sentencia)==1){
             return "cproducto modificado";
@@ -115,7 +115,7 @@ public class producto {
         ResultSet rs = conexion.consultarSQL(sentencia);
         while(rs.next()){
             productos.add(new producto(rs.getInt("cod_producto"),
-            (rs.getString("nombre")),(rs.getString("Descripcion")),(rs.getInt("valor"))));
+            (rs.getString("nombre")),(rs.getString("Descripcion")),(rs.getInt("precio"))));
         }
         return productos;
     }
@@ -128,6 +128,8 @@ public class producto {
         if(rs.next()){
             p.setCodigo((rs.getInt("cod_producto")));
             p.setNombre ((rs.getString("nombre")));
+            p.setDescripcion(rs.getString("descripcion"));
+            p.setPrecio(rs.getInt("precio"));
            
         }
         return p;

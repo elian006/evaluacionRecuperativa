@@ -15,14 +15,14 @@ public class Admin {
     
     private String Admin;
     private String Nombre;
-    private int Password;
+    private String Password;
     private Conexion conexion;
 
     public Admin() throws ClassNotFoundException, SQLException {
         conexion = new Conexion();
     }
 
-    public Admin(String Admin, String Nombre, int Password) throws ClassNotFoundException, SQLException {
+    public Admin(String Admin, String Nombre, String Password) throws ClassNotFoundException, SQLException {
         this.Admin = Admin;
         this.Nombre = Nombre;
         this.Password = Password;
@@ -45,13 +45,14 @@ public class Admin {
         this.Nombre = Nombre;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return Password;
     }
 
-    public void setPassword(int Password) {
-        this.Password = Password;
+    public void setPassword(String Password) {
+        this.Password=Password;
     }
+ 
     
     
      public String registrar() throws SQLException{
@@ -90,21 +91,23 @@ public class Admin {
         ResultSet rs = conexion.consultarSQL(sentencia);
         while(rs.next()){
             Admins.add(new Admin(rs.getString("Admin"),rs.getString("Nombre"),
-                   rs.getInt("Password")));
+                   rs.getString("Password")));
         }
         return Admins;
     }
     public Admin obtenerAdministradores(String Admin) throws SQLException, ClassNotFoundException{
         String sentencia = "select * from administradores where Admin='"+Admin+"'";
         ResultSet rs = conexion.consultarSQL(sentencia);
-        Admin u = new Admin();
+        Admin A = new Admin();
         if(rs.next()){
-            u.setAdmin(rs.getString("usuario"));
-            u.setNombre(rs.getString("Nombre"));
-            u.setPassword(rs.getInt("Password"));
+            A.setAdmin(rs.getString("usuario"));
+            A.setNombre(rs.getString("Nombre"));
+            A.setPassword(rs.getString("Password"));
         }
-        return u;
+        return A;
     }
+
+   
 
     
     
